@@ -4,13 +4,13 @@ import numpy as np
 import random
 import cPickle as pickle
 
-# train_size = 9800
-# test_size = 200
+train_size = 9800
+test_size = 200
 
 
 
-train_size = 128
-test_size = 64
+# train_size = 128
+# test_size = 64
 
 img_size = 75
 size = 5
@@ -158,9 +158,14 @@ train_datasets = [build_dataset() for _ in range(train_size)]
 
 
 print('saving datasets...')
-filename = os.path.join(dirs, 'sort-of-clevr-sample.pickle')
-# filename = os.path.join(dirs,'sort-of-clevr.pickle')
+# filename = os.path.join(dirs, 'sort-of-clevr-sample.pickle')
+filename = os.path.join(dirs,'sort-of-clevr.pickle')
 f = open(filename, 'w')
-pickle.dump((train_datasets, test_datasets), f)
+
+dev_ratio = 0.2
+N_trn = int(train_size*(1-dev_ratio))
+trn_datasets = train_datasets[0:N_trn]
+dev_datasets = train_datasets[N_trn:]
+pickle.dump((trn_datasets, dev_datasets, test_datasets), f)
 f.close()
 print('datasets saved at {}'.format(filename))

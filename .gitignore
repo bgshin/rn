@@ -102,3 +102,4 @@ ENV/
 .idea/
 data
 *.txt
+.DS_Store
