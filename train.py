@@ -4,6 +4,7 @@ import cPickle as pickle
 import random
 import numpy as np
 import math
+import sys
 
 from soclevr import load_all, DataFeeder, Timer
 from model import RN
@@ -65,6 +66,7 @@ with tf.Graph().as_default():
         # print preds
         # print answer_batch
         print 'TRAIN[%d] loss=%f, acc=%f' % (i, loss, acc)
+        sys.stdout.flush()
 
         if i % 50 == 0:
             # if i == 0:
@@ -87,6 +89,7 @@ with tf.Graph().as_default():
                 loss_list.append(loss)
 
             print 'DEV[%d] loss=%f, acc=%f' % (i, np.mean(loss_list), np.mean(acc_list))
+            sys.stdout.flush()
 
 print 'done'
 
